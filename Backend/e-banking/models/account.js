@@ -9,7 +9,11 @@ module.exports = (sequelize, DataType) => {
     },
     balance: {
       type: DataType.INTEGER(60)
+    },
+    user_id: {
+      type: DataType.INTEGER(9)
     }
   })
+  
   return account
 }

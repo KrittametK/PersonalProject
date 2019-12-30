@@ -14,5 +14,8 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING(60)
     }
   })
+  user.associate = (models) => {
+    user.hasMany(models.account, { foreignKey: 'user_id' })
+  }
   return user
 }
