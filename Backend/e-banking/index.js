@@ -45,7 +45,7 @@ db.sequelize.sync({froce: true})
     })
   })
 
-  app.get("/getBalance", (req,res) =>{
+  app.get("/getAccountById", (req,res) =>{
     db.account.findAll({where: {user_id: req.body.id}})
     .then(result => {
       res.status(201).send(result)
@@ -58,15 +58,16 @@ db.sequelize.sync({froce: true})
   })
 
   app.post("/login", (req,res)=> {
-    db.user.findAll({where: {username: req.body.username, password: req.body.password}})
+    db.user.findOne({where: {username: req.body.username , password: req.body.password}})
     .then(result => {
-      res.status(200).send(`${result}, login sucess`)
+      if(result != null){
+        res.status(200).send(result)
+      console.log("Login sucess")
+      }
+      res.send("login fail")
     })
     .catch(err => {
-      res.status(400).json({
-        message: err.message
-      })
-      
+      res.status(404).send("Login fail")
     })
   })
 
