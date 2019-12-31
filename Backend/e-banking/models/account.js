@@ -14,6 +14,9 @@ module.exports = (sequelize, DataType) => {
       type: DataType.INTEGER(9)
     }
   })
+  account.associate = (models) => {
+    account.hasMany(models.transaction, {foreignKey: 'acc_number'})
+  }
   
   return account
 }

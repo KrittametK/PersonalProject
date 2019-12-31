@@ -45,6 +45,23 @@ db.sequelize.sync({froce: true})
     })
   })
 
+  app.post("/addAccount", (req, res) => {
+    db.account.create({
+      user_id: req.body.id,
+      acc_type: req.body.acc_type,
+      acc_number: req.body.acc_number,
+      balance: req.body.balance
+    })
+    .then(result => {
+      res.status(201).send("create user sucess")
+    })
+    .catch(err => {
+      res.status(400).json({
+        message: err.message
+      })
+    })
+  })
+
   app.get("/getAccountById", (req,res) =>{
     db.account.findAll({where: {user_id: req.body.id}})
     .then(result => {
@@ -57,7 +74,7 @@ db.sequelize.sync({froce: true})
     })
   })
 
-  app.post("/login", (req,res)=> {
+  app.post("/login", (req, res) => {
     db.user.findOne({where: {username: req.body.username , password: req.body.password}})
     .then(result => {
       if(result != null){
@@ -67,7 +84,43 @@ db.sequelize.sync({froce: true})
       res.send("login fail")
     })
     .catch(err => {
-      res.status(404).send("Login fail")
+      res.status(400).json({
+        message: err.message
+      })
+    })
+  })
+
+  app.post("/getTransaction", (req, res) => {
+    db.transaction.findAll({where: {acc_number: req.body.acc_number}})
+    .then(result => {
+      res.status(200).send(result)
+    })
+    .catch(err => {
+      res.status(400).json({
+        message: err.message
+      })
+    })
+  })
+
+  app.post("/transaction", (req, res) => {
+    console.log(req.body.amount)
+    db.transaction.create({
+      amount: req.body.amount,
+      trans_type: "+++",
+      acc_number: req.body.acc_send
+    })
+    db.transaction.create({
+      amount: req.body.amount,
+      trans_type: "---",
+      acc_number: req.body.acc_recive
+    })
+    .then(resule => {
+      res.status(201).send("transaction complete")
+    })
+    .catch(err => {
+      res.status(400).json({
+        message: err.message
+      })
     })
   })
 

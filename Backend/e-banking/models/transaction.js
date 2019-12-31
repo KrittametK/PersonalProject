@@ -2,13 +2,13 @@ module.exports = (sequelize, DataType) => {
 
   const transaction = sequelize.define('transaction', {
     amount: {
-      type: DataType.INTEGER(60)
-    },
-    time: {
-      type: DataType.STRING(60)
+      type: DataType.INTEGER
     },
     trans_type: {
-      type: DataType.STRING(60)
+      type: DataType.STRING
+    },
+    acc_number: {
+      type: DataType.INTEGER
     }
   })
   return transaction
