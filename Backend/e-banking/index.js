@@ -103,7 +103,6 @@ db.sequelize.sync({froce: true})
   })
 
   app.post("/transaction", (req, res) => {
-    console.log(req.body.amount)
     db.transaction.create({
       amount: req.body.amount,
       trans_type: "+++",
@@ -116,6 +115,25 @@ db.sequelize.sync({froce: true})
     })
     .then(resule => {
       res.status(201).send("transaction complete")
+    })
+    .catch(err => {
+      res.status(400).json({
+        message: err.message
+      })
+    })
+  })
+
+  app.put("/updateBalance", (req, res) => {
+    db.account.update(
+      {balance: req.body.balance_send},
+      {where: {acc_number: req.body.acc_send}} 
+    )
+    db.account.update(
+      {balance: req.body.balance_recive},
+      {where: {acc_number: req.body.acc_recive}}
+    )
+    .then(result => {
+      res.status(200).send("update sucess")
     })
     .catch(err => {
       res.status(400).json({
