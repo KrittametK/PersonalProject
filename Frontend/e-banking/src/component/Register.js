@@ -3,6 +3,8 @@ import { Button } from "antd";
 import { Input } from "antd";
 import { Row, Col } from "antd";
 import { Layout, Menu, Icon } from "antd";
+import { Link } from "react-router-dom";
+
 const { Header, Content, Footer, Sider } = Layout;
 
 export class Register extends Component {
@@ -37,7 +39,9 @@ export class Register extends Component {
               <Input placeholder="Balance" />
               <hr />
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button type="primary">Register</Button>
+                <Link to="/login">
+                  <Button type="primary">Register</Button>
+                </Link>
               </div>
             </div>
           </Col>

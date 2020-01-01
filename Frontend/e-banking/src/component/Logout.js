@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-export class Home extends Component {
+
+export class Logout extends Component {
   render() {
     return (
       <div>
-        Welcome to e-Banking .........
+        Logout
       </div>
     )
   }
 }
 
-export default Home
+export default Logout

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Layout, Menu, Icon } from "antd";
 import Home from "./Home";
+import Account from "./Account";
+import Transfer from "./Transfer";
+import Coming from "./ComingSoon";
+import Logout from "./Logout";
 import { Route } from "react-router-dom";
 import { Link, Switch } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
-const home = () => <Home />;
 
 export class Service extends Component {
   render() {
@@ -30,21 +33,33 @@ export class Service extends Component {
                   <span className="nav-text">HOME</span>
                 </Link>
               </Menu.Item>
+
               <Menu.Item key="2">
-                <Icon type="user" />
-                <span className="nav-text">My Account</span>
+                <Link to="/service/account">
+                  <Icon type="user" />
+                  <span className="nav-text">My Account</span>
+                </Link>
               </Menu.Item>
+
               <Menu.Item key="3">
-                <Icon type="swap" />
-                <span className="nav-text">Transfer</span>
+                <Link to="/service/transfer">
+                  <Icon type="swap" />
+                  <span className="nav-text">Transfer</span>
+                </Link>
               </Menu.Item>
+
               <Menu.Item key="4">
-                <Icon type="question" />
-                <span className="nav-text">...</span>
+                <Link to="/service/coming">
+                  <Icon type="question" />
+                  <span className="nav-text">...</span>
+                </Link>
               </Menu.Item>
+
               <Menu.Item key="5">
-                <Icon type="unlock" />
-                <span className="nav-text">Log Out</span>
+                <Link to="/login">
+                  <Icon type="unlock" />
+                  <span className="nav-text">Log Out</span>
+                </Link>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -54,6 +69,10 @@ export class Service extends Component {
               <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
                 <Switch>
                   <Route path="/service/home" component={Home} />
+                  <Route path="/service/account" component={Account} />
+                  <Route path="/service/transfer" component={Transfer} />
+                  <Route path="/service/coming" component={Coming} />
+                  <Route path="/service/logout" component={Logout} />
                 </Switch>
               </div>
             </Content>

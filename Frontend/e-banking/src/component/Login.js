@@ -4,8 +4,9 @@ import { Input } from "antd";
 import { Row, Col } from "antd";
 import { Icon } from "antd";
 import { Layout, Menu } from "antd";
-const { Header, Content, Footer, Sider } = Layout;
+import { Route, Link } from "react-router-dom";
 
+const { Header, Content, Footer, Sider } = Layout;
 export class Login extends Component {
   render() {
     return (
@@ -36,10 +37,14 @@ export class Login extends Component {
               <br />
               <Row style={{ display: "flex", justifyContent: "space-between" }}>
                 <Col>
-                  <Button type="primary">Register</Button>
+                  <Link to="/register">
+                    <Button type="primary">Sing Up</Button>
+                  </Link>
                 </Col>
                 <Col>
-                  <Button type="primary">Sign up</Button>
+                  <Link to="/service/home">
+                    <Button type="primary">Sign In</Button>
+                  </Link>
                 </Col>
               </Row>
             </div>
