@@ -142,6 +142,20 @@ db.sequelize.sync({froce: true})
     })
   })
 
+  app.delete("/deleteAccount", (req, res) => {
+    db.user.destroy({
+      where: {id: req.body.id}
+    })
+    .then(result => {
+      res.status(200).send("delete sucess")
+    })
+    .catch(err => {
+      res.status(400).json({
+        message: err.message
+      })
+    })
+  })
+
   app.listen(8080, () => {
     console.log('server start and listen on port 8080')
   })
