@@ -20,7 +20,8 @@ export class Login extends Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      data: []
     };
   }
 
@@ -30,11 +31,13 @@ export class Login extends Component {
       password: this.state.password
     })
       .then(result => {
-        console.log(result.data);
-        if (result.data === "Login sucess") {
+        if (result !== null && result.data !== "Login fail") {
+          this.setState({ data: result.data });
           text = "Welcome to e-Banking";
-          openNotification(result.data, text);
-          this.props.history.push("/service");
+          openNotification("Login sucess", text);
+          this.props.history.push("/service", {
+            data: this.state.data
+          });
         } else if (result.data === "Login fail") {
           text = "username or password is incorrect";
           openNotification(result.data, text);

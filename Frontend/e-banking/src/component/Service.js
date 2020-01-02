@@ -11,7 +11,15 @@ import { Link, Switch } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 
 export class Service extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: this.props.location.state.data
+    };
+  }
   render() {
+    console.log("show state");
+    console.log(this.state.data);
     return (
       <div>
         <Layout>

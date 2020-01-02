@@ -80,10 +80,9 @@ db.sequelize.sync({froce: true})
     db.user.findOne({where: {username: req.body.username , password: req.body.password}})
     .then(result => {
       if(result != null){
-        res.status(200).send("Login sucess")
-      console.log("Login sucess")
+        res.status(200).send(result)
       }
-      res.send("Login fail")
+        res.send("Login fail")
     })
     .catch(err => {
       res.status(400).json({
