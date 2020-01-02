@@ -38,15 +38,15 @@ e-Banking is a system used for conducting various transactions with banks throug
  
  ### For Backend
   Create a config.json in Backend/e-banking/config/config.json
-  edit password and database
+  and edit password and database
   - password use for login to MySQL
   - database is database name in MySQL
     ```
     {
      "development": {
        "username": "root",
-       "password": "K0omueangmsql",
-       "database": "database_e-banking",
+       "password": "xxxxxxxxxx",
+       "database": "xxxxxxxxxx",
        "host": "127.0.0.1",
        "dialect": "mysql",
        "operatorsAliases": false
