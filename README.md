@@ -10,3 +10,8 @@ e-Banking คือ ...
 - [x] react
 - [x] Ant Design
 
+## 📦Backend Built With
+
+- [x] Node js
+- [x] MySQL
+
