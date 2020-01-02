@@ -4,9 +4,14 @@
 
 e-Banking คือ ...
 
-## 📦 Built With
+## 📦Frontend Built With
 
 - [x] js
 - [x] react
-- [x] redux
-- [x] mysql
+- [x] Ant Design
+
+## 📦Backend Built With
+
+- [x] Node js
+- [x] MySQL
+
