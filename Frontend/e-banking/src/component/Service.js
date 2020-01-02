@@ -64,7 +64,11 @@ export class Service extends Component {
             </Menu>
           </Sider>
           <Layout>
-            <Header style={{ background: "#fff", padding: 0 }} />
+            <Header style={{ background: "#fff", padding: 0 }}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <h1>e-Banking</h1>
+              </div>
+            </Header>
             <Content style={{ margin: "24px 16px 0" }}>
               <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
                 <Switch>

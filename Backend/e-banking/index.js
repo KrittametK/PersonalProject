@@ -1,9 +1,11 @@
 const express = require('express')
-const app = express()
 const bodyParser = require('body-parser')
 const db = require('./models')
+const cors = require('cors')
+const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cors())
 
 db.sequelize.sync({froce: true})
 .then(()=>{
@@ -78,10 +80,10 @@ db.sequelize.sync({froce: true})
     db.user.findOne({where: {username: req.body.username , password: req.body.password}})
     .then(result => {
       if(result != null){
-        res.status(200).send(result)
+        res.status(200).send("Login sucess")
       console.log("Login sucess")
       }
-      res.send("login fail")
+      res.send("Login fail")
     })
     .catch(err => {
       res.status(400).json({

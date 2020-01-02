@@ -27,20 +27,26 @@ export class Register extends Component {
               <Icon type="save" />
             </h2>
             <div style={{ width: "50%" }}>
+              <Icon type="edit" />
               <Input placeholder="First Name" />
               <Input placeholder="Last Name" />
-              <Input placeholder="Username" />
 
+              <Icon type="lock" />
+              <Input placeholder="Username" />
               <Input.Password placeholder="Password" />
               <Input.Password placeholder="Confirm Password" />
 
+              <Icon type="file-text" />
               <Input placeholder="Account Number" />
               <Input placeholder="Account Type" />
               <Input placeholder="Balance" />
               <hr />
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Link to="/login">
                   <Button type="primary">Register</Button>
+                </Link>
+                <Link to="/login">
+                  <Button type="primary">back</Button>
                 </Link>
               </div>
             </div>

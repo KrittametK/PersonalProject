@@ -1,13 +1,49 @@
 import React, { Component } from "react";
-import { Button } from "antd";
-import { Input } from "antd";
-import { Row, Col } from "antd";
-import { Icon } from "antd";
-import { Layout, Menu } from "antd";
-import { Route, Link } from "react-router-dom";
+import { Button, Input, Row, Col, Icon, Layout, notification } from "antd";
+import { Link } from "react-router-dom";
+import Axios from "axios";
 
+let text = "";
 const { Header, Content, Footer, Sider } = Layout;
+const openNotification = (messagerecive, descriptionrecive) => {
+  notification.open({
+    message: messagerecive,
+    description: descriptionrecive,
+    style: {
+      width: 600,
+      marginLeft: 335 - 600
+    }
+  });
+};
 export class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
+  handleLogin = () => {
+    Axios.post("http://localhost:8080/login", {
+      username: this.state.username,
+      password: this.state.password
+    })
+      .then(result => {
+        console.log(result.data);
+        if (result.data === "Login sucess") {
+          text = "Welcome to e-Banking";
+          openNotification(result.data, text);
+          this.props.history.push("/service");
+        } else if (result.data === "Login fail") {
+          text = "username or password is incorrect";
+          openNotification(result.data, text);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   render() {
     return (
       <div>
@@ -24,7 +60,11 @@ export class Login extends Component {
             <div>
               <Row>
                 <Icon type="user" />
-                <Input style={{ width: "100%" }} placeholder="input username" />
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="input username"
+                  onChange={e => this.setState({ username: e.target.value })}
+                />
               </Row>
               <br />
               <Row>
@@ -32,6 +72,7 @@ export class Login extends Component {
                 <Input.Password
                   style={{ width: "100%" }}
                   placeholder="input password"
+                  onChange={e => this.setState({ password: e.target.value })}
                 />
               </Row>
               <br />
@@ -42,9 +83,9 @@ export class Login extends Component {
                   </Link>
                 </Col>
                 <Col>
-                  <Link to="/service/home">
-                    <Button type="primary">Sign In</Button>
-                  </Link>
+                  <Button type="primary" onClick={this.handleLogin}>
+                    Sign In
+                  </Button>
                 </Col>
               </Row>
             </div>
