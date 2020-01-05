@@ -25,14 +25,14 @@ e-Banking is a system used for conducting various transactions with banks throug
 ## Feature
 
 - [x] Login
-- [ ] Register(for admin)
+- [x] Register(for admin)
 - [x] View your account
 - [ ] View transaction
 - [x] Transfer money
 
 ## Version
 
-    version 0.3.0
+    version 0.4.0
  
 ## Configguration
  
