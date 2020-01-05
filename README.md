@@ -32,7 +32,7 @@ e-Banking is a system used for conducting various transactions with banks throug
 
 ## Version
 
-    version 0.1.0
+    version 0.3.0
  
 ## Configguration
  
