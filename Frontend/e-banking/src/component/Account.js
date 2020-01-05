@@ -2,25 +2,29 @@ import React, { Component } from "react";
 import { Card } from "antd";
 
 export class Account extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accData: this.props.location.state.accData
+    };
+  }
   render() {
-    return (
+    // console.log(this.state.accData);
+    return this.state.accData.map(acc => (
       <div>
-        Account
-        <div>
-          <Card title="Account Name" style={{ width: 300 }}>
-            <p>Saving</p>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <p>Account Number</p>
-              <p>10010101</p>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <p>Balance</p>
-              <p>50000</p>
-            </div>
-          </Card>
-        </div>
+        <Card title="Account Name" style={{ width: 300 }}>
+          <p>{acc.acc_type}</p>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <p>Account Number</p>
+            <p>{acc.acc_number}</p>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <p>Balance</p>
+            <p>{acc.balance}</p>
+          </div>
+        </Card>
       </div>
-    );
+    ));
   }
 }
 

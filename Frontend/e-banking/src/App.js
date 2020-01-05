@@ -5,7 +5,8 @@ import Login from './component/Login'
 import Register from './component/Register'
 import Service from './component/Service'
 import 'antd/dist/antd.css'
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import 'antd/dist/antd.css';
 
 class App extends React.Component {
   render() {

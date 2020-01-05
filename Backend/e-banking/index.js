@@ -22,6 +22,18 @@ db.sequelize.sync({froce: true})
     })
   })
 
+  app.post("/getBalance", (req, res) => {
+    db.account.findOne({where: {acc_number: req.body.acc_number}})
+    .then(result => {
+      res.status(200).send(result) 
+    })
+    .catch(err => {
+      res.status(400).json({
+        message: err.message
+      })
+    })
+  })
+
   app.post("/createUser", (req, res) => {
     db.user.create({
       name: req.body.name,
@@ -31,7 +43,7 @@ db.sequelize.sync({froce: true})
     })
     .then(output => {
       db.account.create({
-        user_id: 1,
+        user_id: output.id,
         acc_type: req.body.acc_type,
         acc_number: req.body.acc_number,
         balance: req.body.balance
@@ -64,7 +76,7 @@ db.sequelize.sync({froce: true})
     })
   })
 
-  app.get("/getAccountById", (req,res) =>{
+  app.post("/getAccountById", (req,res) =>{
     db.account.findAll({where: {user_id: req.body.id}})
     .then(result => {
       res.status(201).send(result)

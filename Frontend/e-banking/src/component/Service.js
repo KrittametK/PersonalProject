@@ -5,8 +5,8 @@ import Account from "./Account";
 import Transfer from "./Transfer";
 import Coming from "./ComingSoon";
 import Logout from "./Logout";
-import { Route } from "react-router-dom";
-import { Link, Switch } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
+import Axios from "axios";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -14,12 +14,26 @@ export class Service extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.location.state.data
+      data: this.props.location.state.data,
+      accData: this.props.location.state.accData
     };
   }
+
+  handleGetAccount = () => {
+    Axios.post("http://localhost:8080/getAccountById", {
+      id: this.state.data.id
+    })
+      .then(result => {
+        this.setState({ accData: result.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
-    console.log("show state");
     console.log(this.state.data);
+    console.log(this.state.accData);
     return (
       <div>
         <Layout>
@@ -42,15 +56,25 @@ export class Service extends Component {
                 </Link>
               </Menu.Item>
 
-              <Menu.Item key="2">
-                <Link to="/service/account">
+              <Menu.Item key="2" onClick={this.handleGetAccount}>
+                <Link
+                  to={{
+                    pathname: "/service/account",
+                    state: { accData: this.state.accData }
+                  }}
+                >
                   <Icon type="user" />
                   <span className="nav-text">My Account</span>
                 </Link>
               </Menu.Item>
 
               <Menu.Item key="3">
-                <Link to="/service/transfer">
+                <Link
+                  to={{
+                    pathname: "/service/transfer",
+                    state: { accData: this.state.accData }
+                  }}
+                >
                   <Icon type="swap" />
                   <span className="nav-text">Transfer</span>
                 </Link>
