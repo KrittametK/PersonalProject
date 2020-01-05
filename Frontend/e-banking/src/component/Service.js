@@ -113,7 +113,7 @@ export class Service extends Component {
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-              สงวนลิขสิทธิ์ © 2562 บริษัท ฮัฟเฟิลพัพ (ประเทศไทย) จำกัด
+              Copyright © 2019 Hufflepuff Thailand Co., Ltd.
             </Footer>
           </Layout>
         </Layout>
