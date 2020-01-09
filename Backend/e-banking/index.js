@@ -77,9 +77,10 @@ db.sequelize.sync({froce: true})
   })
 
   app.post("/getAccountById", (req,res) =>{
+    
     db.account.findAll({where: {user_id: req.body.id}})
     .then(result => {
-      res.status(201).send(result)
+      res.status(200).send(result)
     })
     .catch(err => {
       res.status(400).json({

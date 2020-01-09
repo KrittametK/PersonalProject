@@ -1,19 +1,11 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Input,
-  Row,
-  Col,
-  Icon,
-  Layout,
-  notification,
-  Carousel
-} from "antd";
+import { Button, Input, Row, Col, Icon, Layout, notification } from "antd";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
 let text = "";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
+
 const openNotification = (messagerecive, descriptionrecive) => {
   notification.open({
     message: messagerecive,
@@ -24,18 +16,13 @@ const openNotification = (messagerecive, descriptionrecive) => {
     }
   });
 };
-
-function onChange(a, b, c) {
-  console.log(a, b, c);
-}
 export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      data: [],
-      accountData: []
+      data: []
     };
   }
 
@@ -47,16 +34,10 @@ export class Login extends Component {
       .then(result => {
         if (result !== null && result.data !== "Login fail") {
           this.setState({ data: result.data });
-          Axios.post("http://localhost:8080/getAccountById", {
-            id: this.state.data.id
-          }).then(result => {
-            this.setState({ accountData: result.data });
-            text = "Welcome to e-Banking";
-            openNotification("Login sucess", text);
-            this.props.history.push("/service", {
-              data: this.state.data,
-              accData: this.state.accountData
-            });
+          text = "Welcome to e-Banking";
+          openNotification("Login sucess", text);
+          this.props.history.push("/service", {
+            data: this.state.data
           });
         } else if (result.data === "Login fail") {
           text = "username or password is incorrect";
@@ -138,21 +119,6 @@ export class Login extends Component {
                 </div>
               </Col>
             </Row>
-            <Carousel afterChange={onChange}>
-              <div>
-                <h3>1</h3>
-              </div>
-              <div>
-                <h3>2</h3>
-              </div>
-              <div>
-                <h3>3</h3>
-              </div>
-              <div>
-                <h3>4</h3>
-              </div>
-            </Carousel>
-            ,
           </Content>
           <Footer>
             <div style={{ display: "flex", justifyContent: "center" }}>

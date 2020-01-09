@@ -15,16 +15,16 @@ export class Service extends Component {
     super(props);
     this.state = {
       data: this.props.location.state.data,
-      accData: this.props.location.state.accData
+      accdata: []
     };
   }
 
-  handleGetAccount = () => {
+  componentDidMount = () => {
     Axios.post("http://localhost:8080/getAccountById", {
       id: this.state.data.id
     })
       .then(result => {
-        this.setState({ accData: result.data });
+        this.setState({ accdata: result.data });
       })
       .catch(err => {
         console.log(err);
@@ -32,20 +32,14 @@ export class Service extends Component {
   };
 
   render() {
-    console.log(this.state.data);
-    console.log(this.state.accData);
     return (
       <div>
-        <Layout>
+        <Layout style={{ height: "100vh" }}>
           <Sider
             breakpoint="lg"
             collapsedWidth="0"
-            onBreakpoint={broken => {
-              console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
-            }}
+            onBreakpoint={broken => {}}
+            onCollapse={(collapsed, type) => {}}
           >
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
@@ -56,11 +50,11 @@ export class Service extends Component {
                 </Link>
               </Menu.Item>
 
-              <Menu.Item key="2" onClick={this.handleGetAccount}>
+              <Menu.Item key="2">
                 <Link
                   to={{
                     pathname: "/service/account",
-                    state: { accData: this.state.accData }
+                    state: { userid: this.state.data.id }
                   }}
                 >
                   <Icon type="user" />
@@ -72,7 +66,7 @@ export class Service extends Component {
                 <Link
                   to={{
                     pathname: "/service/transfer",
-                    state: { accData: this.state.accData }
+                    state: { userid: this.state.data.id }
                   }}
                 >
                   <Icon type="swap" />

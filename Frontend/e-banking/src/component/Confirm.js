@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { Card, Icon, Button } from "antd";
+import { Card, Icon, Button, notification } from "antd";
 import Axios from "axios";
 
 export class Confirm extends Component {
+  openNotification = () => {
+    notification.open({
+      message: "Complete",
+      description: "Transfer sucess.",
+      style: {
+        width: 600,
+        marginLeft: 335 - 600
+      }
+    });
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +55,9 @@ export class Confirm extends Component {
                   balance_recive: this.state.balance_recive,
                   acc_recive: this.state.acc_recive
                 }).then(result => {
+                  this.openNotification();
                   console.log(result);
+                  this.props.history.push("/service/transfer");
                 });
               });
           })
@@ -67,10 +80,17 @@ export class Confirm extends Component {
           <Icon type="caret-right" />
         </div>
         <Card title="Conclude" style={{ width: 300 }}>
+          <h4>From Account Number</h4>
           <p>{this.state.acc_send}</p>
-          <Icon type="vertical-align-bottom" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Icon type="arrow-down" />
+            <br />
+            <br />
+          </div>
+          <h4>To Account Number</h4>
           <p>{this.state.acc_recive}</p>
           <hr />
+          <h4>Amount</h4>
           <p>{this.state.amount}</p>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button type="primary" onClick={this.handleConfirm}>
